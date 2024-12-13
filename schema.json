@@ -2,31 +2,65 @@
   "type": "datasource",
   "metadata": {},
   "schema": {
-    "docs": "https://docs.budibase.com",
-    "friendlyName": "Basic HTTP",
-    "type": "API",
-    "description": "Performs a basic HTTP calls to a URL",
+    "docs": "http://www.surrealdb.com",
+    "friendlyName": "SurrealDB",
+    "type": "Multi Model - SQL Capable",
+    "plus": true,
+    "isSQL": true,
+    "features": {
+      "connection": true,
+      "fetch_table_names": true,
+      "export_schema": true
+    },
+    "description": "SurrealDB Datasource",
     "datasource": {
-      "url": {
+      "host": {
+        "type": "string",
+        "default": "http://localhost",
+        "required": true
+      },
+      "port": {
+        "type": "number",
+        "default": 8000,
+        "required": false
+      },
+      "username": {
+        "type": "string",
+        "default": "root",
+        "required": true
+      },
+      "password": {
+        "type": "password",
+        "default": "root",
+        "required": true
+      },
+      "namespace": {
         "type": "string",
         "required": true
       },
-      "cookie": {
+      "database": {
         "type": "string",
-        "required": false
+        "required": true
       }
     },
     "query": {
+      "getSchema": {},
       "create": {
         "type": "json"
       },
+      "create With JSON": {
+        "type": "json"
+      },
       "read": {
+        "type": "sql"
+      },
+      "readOne": {
+        "readable": true,
         "type": "fields",
         "fields": {
-          "queryString": {
-            "display": "Query string",
+          "id": {
             "type": "string",
-            "required": false
+            "required": true
           }
         }
       },
@@ -41,6 +75,21 @@
             "required": true
           }
         }
+      },
+
+      "relate": {},
+      "upsert": {
+        "type": "json"
+      },
+      "merge": {
+        "type": "fields",
+        "fields": {
+          "id": { "type": "string", "required": true },
+          "content": { "type": "json", "required": true }
+        }
+      },
+      "custom": {
+        "type": "sql"
       }
     }
   }
